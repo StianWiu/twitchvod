@@ -7,7 +7,10 @@
   <div v-else-if="this.finished == true" class="page">
     <h2>Vod finished downloading</h2>
     <button @click="this.download">Download</button>
-    <h3>If download didn't automatically start press this sucker.</h3>
+    <h3>
+      Download should automatically start but it takes a while if VOD is long.
+    </h3>
+    <h3>But if download still doesn't start press this sucker.</h3>
   </div>
   <div v-else class="page">
     <h2>Downloading Vod {{ this.vodId }}</h2>
