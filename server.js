@@ -45,7 +45,8 @@ app.post('/api/download/vod', async function (req, res) {
       .setInputFile(url)
       .setOutputFile(`./downloads/${id}.mp4`)
       .start();
-    console.log(`${id}.mp4 downloaded`);
+    // Get current time
+    console.log(`${id}.mp4 finished downloading at ${new Date()}`);
     db.set("videos." + id, { finished: true })
     // Write down date finished in number form
     let date = new Date();
@@ -96,7 +97,7 @@ app.listen(port, function () {
       let difference = nowMilliseconds - dateMilliseconds;
       console.log(difference)
       if (difference > 21600000) {
-        console.log(`Deleting ${file}`);
+        console.log(`Deleted file ${file} at ${new Date()}`);
         fs.unlinkSync(`./downloads/${file}.mp4`);
         db.delete("videos." + file);
       }

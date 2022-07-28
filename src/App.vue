@@ -66,7 +66,6 @@ export default {
   },
   methods: {
     async getVod() {
-      this.downloading = true;
       // Keep only numbers from string
       this.vodId = this.url.match(/[0-9]+/g).join("");
       await axios
@@ -74,7 +73,18 @@ export default {
           id: this.vodId,
         })
         .then(async () => {
-          this.downloading = true;
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          axios
+            .post("https://vod.astraea.dev/api/progress", {
+              id: this.vodId,
+            })
+            .then(() => {
+              this.downloading = true;
+            })
+            .catch(() => {
+              // Create popup
+              alert("Could not find VOD");
+            });
           while (this.finished == false) {
             await new Promise((resolve) => setTimeout(resolve, 1000));
             await axios
@@ -83,7 +93,6 @@ export default {
               })
               .then((response) => {
                 console.log(response);
-
                 if (this.loaderVersion == 0) {
                   this.loader1 = "ㅤㅤㅤㅤ______";
                   this.loader2 = "ㅤㅤㅤ/|_||_\\`.__";
