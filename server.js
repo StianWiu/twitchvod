@@ -29,6 +29,13 @@ var m3u8ToMp4 = require("m3u8-to-mp4");
 // Receive data from client
 app.post('/api/download/vod', async function (req, res) {
   const id = req.body.id;
+  // If id is not a number, return error
+  if (isNaN(id)) {
+    res.send({
+      error: "Invalid id"
+    });
+    return;
+  }
   res.status(200).send("request received");
   twitch.getVod(id).then(async function (data) {
     db.set("videos." + id, { finished: false })
@@ -46,7 +53,9 @@ app.post('/api/download/vod', async function (req, res) {
     let dateMilliseconds = date.getTime();
     // Write date to database
     db.set("videos." + id + ".date", dateMilliseconds)
-  })
+  }).catch(function (err) {
+    console.log(err);
+  });
 });
 
 app.post('/api/progress', async function (req, res) {
