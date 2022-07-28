@@ -32,14 +32,16 @@
   </div>
   <div class="socials">
     You can find ways to contact me on my website.
-    <a style="color: #42b983" href="https://stianwiu.me">https://stianwiu.me</a>
+    <a style="color: #42b983" href="https://stianwiu.me" target="_blank"
+      >https://stianwiu.me</a
+    >
     <br />
     <br />
     And thanks for using my free service. Hope you find it useful.
     <br />
     <br />
     Consider donating if you like it.
-    <a style="color: #42b983" href="https://ko-fi.com/stianwiu"
+    <a style="color: #42b983" href="https://ko-fi.com/stianwiu" target="_blank"
       >https://ko-fi.com/stianwiu</a
     >
   </div>
