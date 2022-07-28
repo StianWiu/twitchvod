@@ -41,6 +41,7 @@ app.post('/api/download/vod', async function (req, res) {
     db.set("videos." + id, { finished: false })
     let url = data[0].url;
     var converter = new m3u8ToMp4();
+    console.log(`Started downloading ${id}.mp4`)
     await converter
       .setInputFile(url)
       .setOutputFile(`./downloads/${id}.mp4`)
